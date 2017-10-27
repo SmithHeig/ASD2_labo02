@@ -7,6 +7,7 @@
       <itemPath>DiGraph.h</itemPath>
       <itemPath>DirectedCycle.h</itemPath>
       <itemPath>ParcoursEnProfondeur.h</itemPath>
+      <itemPath>SymbolGraph.h</itemPath>
       <itemPath>TopologicalSort.h</itemPath>
       <itemPath>Util.h</itemPath>
     </logicalFolder>
@@ -56,6 +57,8 @@
       </item>
       <item path="ParcoursEnProfondeur.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="SymbolGraph.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="TopologicalSort.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Util.cpp" ex="false" tool="1" flavor2="0">
@@ -97,6 +100,8 @@
       <item path="DirectedCycle.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ParcoursEnProfondeur.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SymbolGraph.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TopologicalSort.h" ex="false" tool="3" flavor2="0">
       </item>
