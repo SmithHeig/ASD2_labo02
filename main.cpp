@@ -60,5 +60,9 @@ int main(int argc, const char * argv[]) {
     
     SymbolGraph<DiGraph> g(fileName1);
     
+    DirectedCycle<DiGraph> dc(g);
+    
+    
+    
     return EXIT_SUCCESS;
 }
