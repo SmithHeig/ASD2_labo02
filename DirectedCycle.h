@@ -51,7 +51,7 @@ public:
             /* Implémenté par nous */
             // cycle contient actuellement le parcours en profondeur inerrompu lorsqu'on a trouvé une boucle.
             // on va le vider jusqu'à trover le node terminal de la boucle pour isoler celle-ci.
-            while(cycle.front() != cycle.end()){
+            while(cycle.front() != cycle.back()){
                 cycle.pop_front();
             }
             return cycle;
@@ -63,16 +63,17 @@ private :
             std::list<int> adjList = g.adjacent(v);
             marked[v] = true;
             stacked[v] = true;
-            for(size_t w = 0; w < adjList.size(); ++w){
+            while(adjList.size()){
                 if(cycleFound) {
                     return true;
                 }
-                else if(!marked[adjList[w]]){
-                    HasCycleRecursiv(adjList[w]);
+                else if(!marked.at(adjList.front())){
+                    HasCycleRecursiv(adjList.front());
                 } 
-                else if (stacked[adjList[w]]){
+                else if (stacked.at(adjList.front())){
                     cycleFound = true;
                 }
+                adjList.pop_front();
             }
             stacked[v] = false;
         }

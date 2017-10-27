@@ -54,7 +54,11 @@ bool checkOrder(const std::vector<int>& order,
 
 int main(int argc, const char * argv[]) {
 
-    /* A IMPLEMENTER */
+    string fileName1 = "prerequis.txt";
+    string fileName2 = "prerequis2.txt";
+    
+    
+    SymbolGraph<DiGraph> g(fileName1);
     
     return EXIT_SUCCESS;
 }
