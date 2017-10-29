@@ -84,7 +84,7 @@ int main(int argc, const char * argv[]) {
     std::list<int> cycle2 = dc2.Cycle();
     
     for(auto i = cycle2.begin(); i != cycle2.end(); i++){
-        cout << "(" << *i << ") ";
+        cout << "(" << g2.name(*i) << ") ";
     }
     cout << endl;
     return EXIT_SUCCESS;

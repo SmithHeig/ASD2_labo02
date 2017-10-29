@@ -70,23 +70,58 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
+            /*
             std::cout << "(DirectedCycle) Has Cycle Recursive for " << v <<" : " << std::endl;
-            std::list<int> adjList = g->G().adjacent(v);
+            
             for(auto i = adjList.begin(); i != adjList.end(); i++){
                 std::cout << "(" << *i<<") " << std::endl;
             }
+            */
             
+            
+            std::list<int> adjList = g->G().adjacent(v);
+            
+            cycle.push_back(v);
             marked[v] = true;
             stacked[v] = true;
+            
+            std::cout << "Cycle of "<< g->name(v) <<" state :";
+            for(int i : cycle){
+                std::cout << g->name(i) << " ";
+            }
+            std::cout << std::endl;
+            
+            //parcours des voisins de v
             while(adjList.size()){
                 if(cycleFound) {
-                    std::cout << "\nCYCLE FOUND !!!\n";
                     return true;
                 }
                 else if(!marked.at(adjList.front())){
                     HasCycleRecursiv(adjList.front());
+                    
+                    if(!cycleFound) {
+                        cycle.pop_back();
+
+                        std::cout << "Cycle state3 :";
+                        for(int i : cycle){
+                            std::cout << g->name(i) << " ";
+                        }
+                        std::cout << std::endl;
+                    }
                 } 
                 else if (stacked.at(adjList.front())){
+                    
+                    //ajoutes le dernier du cycle
+                    cycle.push_back(adjList.front());
+                    /*
+                    std::cout << "Cycle state2 :";
+                    for(int i : cycle){
+                        std::cout << g->name(i) << " ";
+                    }
+                    std::cout << std::endl;
+                    
+                    std::cout << "\nCYCLE FOUND !!!\n";
+                     */
                     cycleFound = true;
                 }
                 adjList.pop_front();
