@@ -42,7 +42,6 @@ public:
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
-            
             for(int i = 0; i < g->G().V(); ++i){
                 if(HasCycleRecursiv(i)) {
                     return true;
@@ -58,7 +57,7 @@ public:
 	//liste les indexes des sommets formant une boucle
 	std::list<int> Cycle() {
             /* Implémenté par nous */
-            // cycle contient actuellement le parcours en profondeur inerrompu lorsqu'on a trouvé une boucle.
+            // cycle contient actuellement le parcours en profondeur interrompu lorsqu'on a trouvé une boucle.
             // on va le vider jusqu'à trover le node terminal de la boucle pour isoler celle-ci.
             while(cycle.front() != cycle.back()){
                 cycle.pop_front();
