@@ -16,53 +16,49 @@
 #include <vector>
 #include <exception>
 
-template < typename GraphType >
+template <typename GraphType>
 class TopologicalSort {
 private:
-	/* A DEFINIR */
-    const GraphType & g;
-    //std::vector<int> postOrder;
-    std::vector<int> preOrder;
-    std::vector<int> reversePostOrder;
+    /* A DEFINIR */
+    std::vector<int> postOrder;
+    //std::vector<int> preOrder;
+    std::vector<int> topologicalOrder;
     
 public:
-    //constructeur
+    //constructeur, Attends un DiGraph
     TopologicalSort(const GraphType & g) {
-        /* A IMPLEMENTER */
+        /* A IMPLEMENTER */  
+        
+        //détection de cycle
+        DirectedCycle<GraphType> dcg = DirectedCycle<GraphType>(g);
+        if(dcg.HasCycle()){
+            throw(GraphNotDAGException(dcg.Cycle()));
+        }
+        
+        DFS<GraphType> dfs = DFS<GraphType>(g.reverse());
+        
+        //parcours DFS du graphe inversé
+        dfs.visitGraph(addVertexPreOrder, addVertexPostOrder);
         
         
-        this->g = &g;
-
-        
-        
-        /* vous devez verifier la presence d'un cycle, auquel cas il faut lancer une  GraphNotDAGException*/
     }
     
     void addVertexPostOrder(const int v){
-        //postOrder.push_back(v);
+        postOrder.push_back(v);
     }
     
     void addVertexPreOrder(const int v){
-        preOrder.push_back(v);
+        //preOrder.push_back(v);
     }
-    
+    /*
     void CreateReversePostOrder(){
-        for(auto i = postOrder.end(); i != postOrder.begin(); --i)
-            reversePostOrder.push_back(*i);
+        
     }
     
+    */
     //tableau contenant l'ordre de parcours des indexes des sommets dans le graphe
     const std::vector<int>& Order() {
-        
-        // Inverser g.reverse
-        // DFS g.reverse
-        g.visitGraph<addVertexPreOrder, addVertexPostOrder>();
-        CreateReversePostOrder();
-        return &reversePostOrder;
-        
-        
-        /* A IMPLEMENTER */
-        //return ...
+        return topologicalOrder;
     }
     
     //exception si le graphe n'est pas un DAG (Directed Acyclic Graph)
@@ -74,11 +70,7 @@ public:
         
     public:
         GraphNotDAGException(const std::list<int> cycle) noexcept : exception(), cycle(cycle) {
-            //std::copy( cycle.begin(), liste1.end());
             printf(what());
-//            for(auto i = cycle.begin(); i < cycle.end(); ++i){
-//                printf(*i + " ");
-//            }
         }
         
         virtual const char* what() const noexcept {
