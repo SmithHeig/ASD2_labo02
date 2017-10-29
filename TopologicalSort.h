@@ -1,6 +1,9 @@
 /*
  * File:   TopologicalSort.h
  * Author: Olivier Cuisenaire
+ * 
+ * Modified by: Alleman Adrien, Chatillon Jérémie and Smith James
+ * Modified the: 29.10.2017
  *
  * Created on 08. octobre 2014, 14:07
  *

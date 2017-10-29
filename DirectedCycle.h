@@ -1,7 +1,8 @@
 /*
  * File:   DirectedCycle.h
  * Author: Olivier Cuisenaire
- * Modified by: Alleman Adrien, Chatillon Jérémie et James SMith
+ * Modified by: Alleman Adrien, Chatillon Jérémie et James Smith
+ * 
  * Created on 08. octobre 2014, 10:46
  * Modified on 27.10.17
  *
@@ -42,6 +43,7 @@ public:
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
+            // Test de cycle sur tous les sommets
             for(int i = 0; i < g->G().V(); ++i){
                 if(HasCycleRecursiv(i)) {
                     return true;
@@ -79,9 +81,11 @@ private :
                 if(cycleFound) {
                     return true;
                 }
+                // Encore des voisins à parcourir
                 else if(!marked.at(adjList.front())){
                     HasCycleRecursiv(adjList.front());
                 } 
+                // Cycle trouvé!
                 else if (stacked.at(adjList.front())){
                     
                     //ajoutes le dernier du cycle

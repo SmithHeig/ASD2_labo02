@@ -2,6 +2,9 @@
  * File:   DiGraph.h
  * Author: Cuisenaire
  *
+ * Modified by: Alleman Adrien, Chatillon Jérémie and Smith James
+ * Modified the: 29.10.2017
+ * 
  * Created on 7. octobre 2014, 16:54
  * 
  * Implementation d'un graphe oriente par liste d'adjacence
