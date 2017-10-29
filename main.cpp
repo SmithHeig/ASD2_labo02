@@ -1,6 +1,9 @@
 /*
  * File:   DFSOrder.h
  * Author: Cuisenaire
+ *
+ * Modified by: Alleman Adrien, Chatillon Jérémie and Smith James
+ * Modified the: 29.10.2017
  * Labo 2
  * Created on 3. novembre 2014, 08:23
  */
