@@ -37,7 +37,6 @@ public:
     //creation du SymbolGraph a partir du fichier movies.txt
     SymbolGraph(const std::string& filename, char splitter = '/') : splitter(splitter) { 
 
-        std::cout << "New Symbole Graphe " << std::endl;        
         //lecture du fichier, ligne par ligne puis element par element (separe par des /)
         std::string line;
         int cnt=0; 
@@ -55,7 +54,7 @@ public:
         keys.resize(cnt);
         for(const auto& pair : symbolTable)
             keys[pair.second] = pair.first; 
-        std::cout << "New Graph size : " << cnt << std::endl;
+        
         g = new Graph(cnt);
         
         s.open(filename);
@@ -67,12 +66,9 @@ public:
             for( size_t i = 1; i < names.size(); ++i ) {
                 int w = symbolTable[names[i]];
                 g->addEdge(v,w);
-                std::cout << "New Edge (" << v << "," << w << ")" << std::endl; 
             }
         }
         s.close();
-        
-        std::cout << "End SymboleGraph constructor" << std::endl;
     }
     
     //verifie la presence d'un symbole

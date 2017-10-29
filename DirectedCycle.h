@@ -1,7 +1,9 @@
 /*
  * File:   DirectedCycle.h
  * Author: Olivier Cuisenaire
+ * Modified by: Alleman Adrien, Chatillon Jérémie et James SMith
  * Created on 08. octobre 2014, 10:46
+ * Modified on 27.10.17
  *
  * A implementer
  * Classe permettant la detection de cycle sur un graphe oriente
@@ -40,16 +42,13 @@ public:
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
-            std::cout << "(DirectedCycle) Debut du test de cycles pour  : " << g->G().V() << "sommets" << std::endl;
             
             for(int i = 0; i < g->G().V(); ++i){
-                
                 if(HasCycleRecursiv(i)) {
                     return true;
                 }
             }
             
-            std::cout << "(DirectedCycle) Fin du test de cycles :"<< std::endl;
             return false;
             /* Fin implémenté par nous */
 	}
@@ -70,29 +69,35 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
-            std::cout << "(DirectedCycle) Has Cycle Recursive for " << v <<" : " << std::endl;
             std::list<int> adjList = g->G().adjacent(v);
-            for(auto i = adjList.begin(); i != adjList.end(); i++){
-                std::cout << "(" << *i<<") " << std::endl;
-            }
             
+            cycle.push_back(v);
             marked[v] = true;
             stacked[v] = true;
+            
+            //parcours des voisins de v
             while(adjList.size()){
                 if(cycleFound) {
-                    std::cout << "\nCYCLE FOUND !!!\n";
                     return true;
                 }
                 else if(!marked.at(adjList.front())){
                     HasCycleRecursiv(adjList.front());
                 } 
                 else if (stacked.at(adjList.front())){
+                    
+                    //ajoutes le dernier du cycle
+                    cycle.push_back(adjList.front());
+                     
                     cycleFound = true;
                 }
                 adjList.pop_front();
             }
             stacked[v] = false;
-            return false;
+            //retour d'un appel récursif sans avoir trouvé de cycle on retire de la liste
+            if(!cycleFound) {
+                cycle.pop_back();
+            }
+            return cycleFound;
         }
 	/* End Définit par nous */
 };

@@ -20,10 +20,6 @@ template < typename GraphType >
 class TopologicalSort {
 private:
 	/* A DEFINIR */
-    const GraphType & g;
-    std::vector<int> postOrder;
-    std::vector<int> preOrder;
-    std::vector<int> reversePostOrder;
     
 public:
     //constructeur
