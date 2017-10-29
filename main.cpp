@@ -62,41 +62,8 @@ int main(int argc, const char * argv[]) {
     string fileName1 = "prerequis.txt";
     string fileName2 = "prerequis2.txt";
     
-    /*
-    SymbolGraph<DiGraph> g1(fileName1, ',');
-    
-    DirectedCycle<SymbolGraph<DiGraph>> dc1(g1);
-    
-    cout << "Does file 1 have a cycle ? : " << dc1.HasCycle() << endl;
-  
-    cout << "The cycle is : " << endl;
-    std::list<int> cycle1 = dc1.Cycle();
-    
-    for(auto i = cycle1.begin(); i != cycle1.end(); i++){
-        cout << "(" << g1.name(*i) << ") ";
-    }
-    cout << endl;
-    
-    SymbolGraph<DiGraph> g2(fileName2,',');
-    
-    TopologicalSort<SymbolGraph<DiGraph>> dc3(g2);
-    
-    DirectedCycle<SymbolGraph<DiGraph>> dc2(g2);
-    cout << "Does file 2 have a cycle ? : " << dc2.HasCycle() << endl;
-  
-    cout << "The cycle is : " << endl;
-    std::list<int> cycle2 = dc2.Cycle();
-    
-    for(auto i = cycle2.begin(); i != cycle2.end(); i++){
-        cout << "(" << g2.name(*i) << ") ";
-    }
-    cout << endl;
-    */
-    cout << "1" << endl;
     //crée un SymboleGraphe avec le fichier 1
     SymbolGraph<DiGraph> g1(fileName1, ',');
-    
-    cout << "2" << endl;
     
     try {
         
@@ -110,7 +77,7 @@ int main(int argc, const char * argv[]) {
         for(int i : ordre){
             cout << "<" << g1.name(i) << "> ";
         }
-        
+        cout << endl;
     } catch(TopologicalSort<DiGraph>::GraphNotDAGException &e){
         cout << "n'est pas un DAG" << endl << "Cycle trouvé:" << endl;
         std::list<int> cycle = e.Cycle();
@@ -121,11 +88,32 @@ int main(int argc, const char * argv[]) {
         cout << endl;
     }
     
-    SymbolGraph<DiGraph> g2(fileName1, ',');
     
-    TopologicalSort<SymbolGraph<DiGraph>> ts2(g2);
+    //crée un SymboleGraphe avec le fichier 1
+    SymbolGraph<DiGraph> g2(fileName2, ',');
     
+    try {
+        
+        cout << fileName2 << " ";
+        
+        TopologicalSort<DiGraph> ts2(g2.G());
+        
+        cout << "est un DAG" << endl;
+        
+        vector<int> ordre = ts2.Order();
+        for(int i : ordre){
+            cout << "<" << g2.name(i) << "> ";
+        }
+        
+    } catch(TopologicalSort<DiGraph>::GraphNotDAGException &e){
+        cout << "n'est pas un DAG" << endl << "Cycle trouvé:" << endl;
+        std::list<int> cycle = e.Cycle();
+        
+        for(auto i = cycle.begin(); i != cycle.end(); i++){
+            cout << "<" << g2.name(*i) << "> ";
+        }
+        cout << endl;
+    }
     
     return EXIT_SUCCESS;
 }
-
