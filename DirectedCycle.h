@@ -43,7 +43,7 @@ public:
             std::cout << "(DirectedCycle) Debut du test de cycles pour  : " << g->G().V() << "sommets" << std::endl;
             
             for(int i = 0; i < g->G().V(); ++i){
-                
+                std::cout << "New HasCycle begin " << std::endl;
                 if(HasCycleRecursiv(i)) {
                     return true;
                 }
@@ -81,11 +81,12 @@ private :
             
             std::list<int> adjList = g->G().adjacent(v);
             
+            std::cout << "Cycle of " << g->name(v) << " Adding " << g->name(v) << std::endl;
             cycle.push_back(v);
             marked[v] = true;
             stacked[v] = true;
             
-            std::cout << "Cycle of "<< g->name(v) <<" state :";
+            std::cout << "Cycle of " << g->name(v) <<" state :";
             for(int i : cycle){
                 std::cout << g->name(i) << " ";
             }
@@ -99,10 +100,12 @@ private :
                 else if(!marked.at(adjList.front())){
                     HasCycleRecursiv(adjList.front());
                     
+                    //retoru d'un appel récursif sans avoir trouvé de cycle on retire de la liste
                     if(!cycleFound) {
+                        std::cout << "Cycle of " << g->name(v) << " Subbing " << g->name(cycle.back()) << std::endl;
                         cycle.pop_back();
-
-                        std::cout << "Cycle state3 :";
+                        
+                        std::cout << "Cycle of " << g->name(v) <<" state3 :";
                         for(int i : cycle){
                             std::cout << g->name(i) << " ";
                         }
@@ -112,22 +115,23 @@ private :
                 else if (stacked.at(adjList.front())){
                     
                     //ajoutes le dernier du cycle
+                    std::cout << "Cycle of " << g->name(v) << " Adding " << g->name(adjList.front()) << std::endl;
                     cycle.push_back(adjList.front());
-                    /*
-                    std::cout << "Cycle state2 :";
+                    
+                    std::cout << "Cycle of " << g->name(v) <<" state2 :";
                     for(int i : cycle){
                         std::cout << g->name(i) << " ";
                     }
                     std::cout << std::endl;
                     
                     std::cout << "\nCYCLE FOUND !!!\n";
-                     */
+                     
                     cycleFound = true;
                 }
                 adjList.pop_front();
             }
             stacked[v] = false;
-            return false;
+            return cycleFound;
         }
 	/* End Définit par nous */
 };
