@@ -2,10 +2,13 @@
 
 DiGraph::DiGraph(int V) 
 {
+        std::cout << "New Di Graphe from size : " << V << std::endl;
 	adjacencyLists.resize(V);
+        std::cout << "End DiGraph constructor" << std::endl;
 }
 
 DiGraph::DiGraph(std::istream& s) {
+        std::cout << "New Di Graphe from stream" << std::endl;
 	int V,E,v,w;
 	
 	s >> V;
@@ -16,8 +19,12 @@ DiGraph::DiGraph(std::istream& s) {
 	for (int i = 0; i < E; i++) {
 		s >> v;
 		s >> w;
+                
+                std::cout << "New Edge" << v << "," << w << ") " << std::endl;
 		addEdge(v, w);
 	}
+        std::cout << "End DiGraph constructor" << std::endl;
+
 }
 
 void DiGraph::addEdge(int v, int w) {

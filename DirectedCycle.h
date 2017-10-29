@@ -40,8 +40,17 @@ public:
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
-            std::cout << "Debut du test de cycles :"<< std::endl;
-            return HasCycleRecursiv(0);
+            std::cout << "(DirectedCycle) Debut du test de cycles pour  : " << g->G().V() << "sommets" << std::endl;
+            
+            for(int i = 0; i < g->G().V(); ++i){
+                
+                if(HasCycleRecursiv(i)) {
+                    return true;
+                }
+            }
+            
+            std::cout << "(DirectedCycle) Fin du test de cycles :"<< std::endl;
+            return false;
             /* Fin implémenté par nous */
 	}
 	
@@ -61,7 +70,7 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
-            std::cout << "Adj List for " << v <<" : " << std::endl;
+            std::cout << "(DirectedCycle) Has Cycle Recursive for " << v <<" : " << std::endl;
             std::list<int> adjList = g->G().adjacent(v);
             for(auto i = adjList.begin(); i != adjList.end(); i++){
                 std::cout << "(" << *i<<") " << std::endl;
