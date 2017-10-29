@@ -20,20 +20,26 @@ template < typename GraphType >
 class TopologicalSort {
 private:
 	/* A DEFINIR */
+    const GraphType & g;
+    //std::vector<int> postOrder;
+    std::vector<int> preOrder;
+    std::vector<int> reversePostOrder;
     
 public:
     //constructeur
     TopologicalSort(const GraphType & g) {
         /* A IMPLEMENTER */
         
-        this->g = g;
+        
+        this->g = &g;
+
         
         
         /* vous devez verifier la presence d'un cycle, auquel cas il faut lancer une  GraphNotDAGException*/
     }
     
     void addVertexPostOrder(const int v){
-        postOrder.push_back(v);
+        //postOrder.push_back(v);
     }
     
     void addVertexPreOrder(const int v){
@@ -48,6 +54,8 @@ public:
     //tableau contenant l'ordre de parcours des indexes des sommets dans le graphe
     const std::vector<int>& Order() {
         
+        // Inverser g.reverse
+        // DFS g.reverse
         g.visitGraph<addVertexPreOrder, addVertexPostOrder>();
         CreateReversePostOrder();
         return &reversePostOrder;
@@ -66,11 +74,11 @@ public:
         
     public:
         GraphNotDAGException(const std::list<int> cycle) noexcept : exception(), cycle(cycle) {
-            std::copy( cycle.begin(), liste1.end());
+            //std::copy( cycle.begin(), liste1.end());
             printf(what());
-            for(auto i = cycle.begin(); i < cycle.end(); ++i){
-                printf(*i + " ");
-            }
+//            for(auto i = cycle.begin(); i < cycle.end(); ++i){
+//                printf(*i + " ");
+//            }
         }
         
         virtual const char* what() const noexcept {

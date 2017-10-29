@@ -77,6 +77,8 @@ int main(int argc, const char * argv[]) {
     /* TEST FILE 2 */
     SymbolGraph<DiGraph> g2(fileName2,',');
     
+    TopologicalSort<SymbolGraph<DiGraph>> dc3(g2);
+    
     DirectedCycle<SymbolGraph<DiGraph>> dc2(g2);
     cout << "Does file 2 have a cycle ? : " << dc2.HasCycle() << endl;
   
