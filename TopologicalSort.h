@@ -19,7 +19,9 @@
 template < typename GraphType >
 class TopologicalSort {
 private:
-	/* A DEFINIR */
+    std::list<int> listSommet;
+    int t = 0;
+    std::list<int> listTraitement;
     
 public:
     //constructeur

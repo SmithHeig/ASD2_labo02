@@ -1,7 +1,9 @@
 /*
  * File:   DirectedCycle.h
  * Author: Olivier Cuisenaire
+ * Modified by: Alleman Adrien, Chatillon Jérémie et James SMith
  * Created on 08. octobre 2014, 10:46
+ * Modified on 27.10.17
  *
  * A implementer
  * Classe permettant la detection de cycle sur un graphe oriente
@@ -40,16 +42,13 @@ public:
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
-            std::cout << "(DirectedCycle) Debut du test de cycles pour  : " << g->G().V() << "sommets" << std::endl;
             
             for(int i = 0; i < g->G().V(); ++i){
-                std::cout << "New HasCycle begin " << std::endl;
                 if(HasCycleRecursiv(i)) {
                     return true;
                 }
             }
             
-            std::cout << "(DirectedCycle) Fin du test de cycles :"<< std::endl;
             return false;
             /* Fin implémenté par nous */
 	}
@@ -70,27 +69,11 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
-            /*
-            std::cout << "(DirectedCycle) Has Cycle Recursive for " << v <<" : " << std::endl;
-            
-            for(auto i = adjList.begin(); i != adjList.end(); i++){
-                std::cout << "(" << *i<<") " << std::endl;
-            }
-            */
-            
-            
             std::list<int> adjList = g->G().adjacent(v);
             
-            std::cout << "Cycle of " << g->name(v) << " Adding " << g->name(v) << std::endl;
             cycle.push_back(v);
             marked[v] = true;
             stacked[v] = true;
-            
-            std::cout << "Cycle of " << g->name(v) <<" state :";
-            for(int i : cycle){
-                std::cout << g->name(i) << " ";
-            }
-            std::cout << std::endl;
             
             //parcours des voisins de v
             while(adjList.size()){
@@ -102,27 +85,13 @@ private :
                     
                     //retoru d'un appel récursif sans avoir trouvé de cycle on retire de la liste
                     if(!cycleFound) {
-                        std::cout << "Cycle of " << g->name(v) << " Subbing " << g->name(cycle.back()) << std::endl;
                         cycle.pop_back();
-                        
-                        std::cout << "Cycle of " << g->name(v) <<" state3 :";
-                        for(int i : cycle){
-                            std::cout << g->name(i) << " ";
-                        }
-                        std::cout << std::endl;
                     }
                 } 
                 else if (stacked.at(adjList.front())){
                     
                     //ajoutes le dernier du cycle
-                    std::cout << "Cycle of " << g->name(v) << " Adding " << g->name(adjList.front()) << std::endl;
                     cycle.push_back(adjList.front());
-                    
-                    std::cout << "Cycle of " << g->name(v) <<" state2 :";
-                    for(int i : cycle){
-                        std::cout << g->name(i) << " ";
-                    }
-                    std::cout << std::endl;
                     
                     std::cout << "\nCYCLE FOUND !!!\n";
                      
