@@ -31,15 +31,16 @@ public:
 	//constructeur
 	DirectedCycle(const GraphType& g) {
             /* Implémenté par nous */
-            marked.resize(g.V(), false);
-            stacked.resize(g.V(), false);
-            this->g = g;
+            marked.resize(g.G().V(), false);
+            stacked.resize(g.G().V(), false);
+            this->g = &g;
             /* Fin implémenté par nous */
 	}
 	
 	//indique la presence d'un cycle
 	bool HasCycle() {
             /* Implémenté par nous */
+            std::cout << "Debut du test de cycles :"<< std::endl;
             return HasCycleRecursiv(0);
             /* Fin implémenté par nous */
 	}
@@ -60,11 +61,17 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
-            std::list<int> adjList = g.adjacent(v);
+            std::cout << "Adj List for " << v <<" : " << std::endl;
+            std::list<int> adjList = g->G().adjacent(v);
+            for(auto i = adjList.begin(); i != adjList.end(); i++){
+                std::cout << "(" << *i<<") " << std::endl;
+            }
+            
             marked[v] = true;
             stacked[v] = true;
             while(adjList.size()){
                 if(cycleFound) {
+                    std::cout << "\nCYCLE FOUND !!!\n";
                     return true;
                 }
                 else if(!marked.at(adjList.front())){
@@ -76,6 +83,7 @@ private :
                 adjList.pop_front();
             }
             stacked[v] = false;
+            return false;
         }
 	/* End Définit par nous */
 };
