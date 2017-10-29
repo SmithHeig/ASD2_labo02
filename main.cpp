@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
     string fileName1 = "prerequis.txt";
     string fileName2 = "prerequis2.txt";
     
-    /* TEST FILE 1*/
+    /*
     SymbolGraph<DiGraph> g1(fileName1, ',');
     
     DirectedCycle<SymbolGraph<DiGraph>> dc1(g1);
@@ -74,7 +74,6 @@ int main(int argc, const char * argv[]) {
     }
     cout << endl;
     
-    /* TEST FILE 2 */
     SymbolGraph<DiGraph> g2(fileName2,',');
     
     TopologicalSort<SymbolGraph<DiGraph>> dc3(g2);
@@ -89,8 +88,40 @@ int main(int argc, const char * argv[]) {
         cout << "(" << g2.name(*i) << ") ";
     }
     cout << endl;
+    */
+    cout << "1" << endl;
+    //crée un SymboleGraphe avec le fichier 1
+    SymbolGraph<DiGraph> g1(fileName1, ',');
+    
+    cout << "2" << endl;
+    //détecte un cycle
+    DirectedCycle<SymbolGraph<DiGraph>> dc1(g1);
+    
+    cout << "3" << endl;
+    cout << fileName1 << " ";
+    if(dc1.HasCycle()){
+        cout << "n'est pas un DAG" << endl << "Cycle trouvé:" << endl;
+        std::list<int> cycle = dc1.Cycle();
+        
+        for(auto i = cycle.begin(); i != cycle.end(); i++){
+            cout << "<" << g1.name(*i) << "> ";
+        }
+        cout << endl;
+    } else {
+        cout << "est un DAG" << endl;
+        TopologicalSort<SymbolGraph<DiGraph>> ts1(g1);
+        
+        vector<int> ordre = ts1.Order();
+        for(int i : ordre){
+            cout << "<" << g1.name(i) << "> ";
+        }
+    }
     
     
+    
+    SymbolGraph<DiGraph> g2(fileName1, ',');
+    
+    TopologicalSort<SymbolGraph<DiGraph>> ts2(g2);
     
     
     return EXIT_SUCCESS;

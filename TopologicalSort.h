@@ -22,8 +22,7 @@ class TopologicalSort {
 private:
     /* A DEFINIR */
     std::vector<int> postOrder;
-    std::vector<int> preOrder;
-    std::vector<int> topologicalOrder;
+    //std::vector<int> preOrder;
     
 public:
     void addVertexPostOrder(const int v){
@@ -31,7 +30,7 @@ public:
     }
     
     void addVertexPreOrder(const int v){
-        preOrder.push_back(v);
+        //preOrder.push_back(v);
     }
     
     //constructeur, Attends un SymbolGraph<DiGraph>
@@ -61,7 +60,7 @@ public:
     */
     //tableau contenant l'ordre de parcours des indexes des sommets dans le graphe
     const std::vector<int>& Order() {
-        return topologicalOrder;
+        return postOrder;
     }
     
     //exception si le graphe n'est pas un DAG (Directed Acyclic Graph)
