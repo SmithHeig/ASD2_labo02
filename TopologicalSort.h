@@ -25,7 +25,7 @@ class TopologicalSort {
 private:
     /* A DEFINIR */
     std::vector<int> postOrder;
-    //std::vector<int> preOrder;
+    std::vector<int> preOrder;
     
 public:
     void addVertexPostOrder(const int v){
@@ -33,7 +33,7 @@ public:
     }
     
     void addVertexPreOrder(const int v){
-        //preOrder.push_back(v);
+        preOrder.push_back(v);
     }
     
     //constructeur, Attends un SymbolGraph<DiGraph>
@@ -49,11 +49,11 @@ public:
         DFS<DiGraph> dfs = DFS<DiGraph>(g.G().reverse());
         
         //parcours DFS du graphe inversé
-        void(*addVertexPreOrderPtr)(const int);
-        void(*addVertexPostOrderPtr)(const int);
+        void(*addVertexPreOrderPtr)(int);
+        void(*addVertexPostOrderPtr)(int);
+        addVertexPostOrderPtr = &addVertexPostOrder;
+        addVertexPreOrderPtr = &addVertexPreOrder;
         dfs.visitGraph(addVertexPreOrderPtr, addVertexPostOrderPtr);
-        
-        
     }
     /*
     void CreateReversePostOrder(){
