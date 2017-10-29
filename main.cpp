@@ -94,7 +94,7 @@ int main(int argc, const char * argv[]) {
     
     try {
         
-        cout << fileName2 << " ";
+        cout << endl <<  fileName2 << " ";
         
         TopologicalSort<DiGraph> ts2(g2.G());
         

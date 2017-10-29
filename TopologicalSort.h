@@ -57,7 +57,6 @@ public:
         
     public:
         GraphNotDAGException(const std::list<int> cycle) noexcept : exception(), cycle(cycle) {
-            std::cout << what();
         }
         
         virtual const char* what() const noexcept {
