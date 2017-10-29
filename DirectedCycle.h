@@ -34,8 +34,8 @@ public:
 	//constructeur
 	DirectedCycle(const GraphType& g) {
             /* Implémenté par nous */
-            marked.resize(g.G().V(), false);
-            stacked.resize(g.G().V(), false);
+            marked.resize(g.V(), false);
+            stacked.resize(g.V(), false);
             this->g = &g;
             /* Fin implémenté par nous */
 	}
@@ -44,7 +44,7 @@ public:
 	bool HasCycle() {
             /* Implémenté par nous */
             // Test de cycle sur tous les sommets
-            for(int i = 0; i < g->G().V(); ++i){
+            for(int i = 0; i < g.V(); ++i){
                 if(HasCycleRecursiv(i)) {
                     return true;
                 }
@@ -70,7 +70,7 @@ public:
 private : 
 	/* Définit par nous */
         bool HasCycleRecursiv(int v){
-            std::list<int> adjList = g->G().adjacent(v);
+            std::list<int> adjList = g.adjacent(v);
             
             cycle.push_back(v);
             marked[v] = true;

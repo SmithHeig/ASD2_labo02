@@ -97,30 +97,29 @@ int main(int argc, const char * argv[]) {
     SymbolGraph<DiGraph> g1(fileName1, ',');
     
     cout << "2" << endl;
-    //détecte un cycle
-    DirectedCycle<SymbolGraph<DiGraph>> dc1(g1);
     
-    cout << "3" << endl;
-    cout << fileName1 << " ";
-    if(dc1.HasCycle()){
-        cout << "n'est pas un DAG" << endl << "Cycle trouvé:" << endl;
-        std::list<int> cycle = dc1.Cycle();
+    try {
         
-        for(auto i = cycle.begin(); i != cycle.end(); i++){
-            cout << "<" << g1.name(*i) << "> ";
-        }
-        cout << endl;
-    } else {
+        cout << fileName1 << " ";
+        
+        TopologicalSort<DiGraph> ts1(g1.G());
+        
         cout << "est un DAG" << endl;
-        TopologicalSort<SymbolGraph<DiGraph>> ts1(g1);
         
         vector<int> ordre = ts1.Order();
         for(int i : ordre){
             cout << "<" << g1.name(i) << "> ";
         }
+        
+    } catch(TopologicalSort<DiGraph>::GraphNotDAGException &e){
+        cout << "n'est pas un DAG" << endl << "Cycle trouvé:" << endl;
+        std::list<int> cycle = e.Cycle();
+        
+        for(auto i = cycle.begin(); i != cycle.end(); i++){
+            cout << "<" << g1.name(*i) << "> ";
+        }
+        cout << endl;
     }
-    
-    
     
     SymbolGraph<DiGraph> g2(fileName1, ',');
     
