@@ -16,6 +16,7 @@
 #include <vector>
 #include <exception>
 
+
 template <typename GraphType>
 class TopologicalSort {
 private:
@@ -25,7 +26,15 @@ private:
     std::vector<int> topologicalOrder;
     
 public:
-    //constructeur, Attends un DiGraph
+    void addVertexPostOrder(const int v){
+        postOrder.push_back(v);
+    }
+    
+    void addVertexPreOrder(const int v){
+        //preOrder.push_back(v);
+    }
+    
+    //constructeur, Attends un SymbolGraph<DiGraph>
     TopologicalSort(const GraphType & g) {
         /* A IMPLEMENTER */  
         
@@ -35,20 +44,12 @@ public:
             throw(GraphNotDAGException(dcg.Cycle()));
         }
         
-        DFS<GraphType> dfs = DFS<GraphType>(g.reverse());
+        DFS<DiGraph> dfs = DFS<DiGraph>(g.G().reverse());
         
         //parcours DFS du graphe inversé
         dfs.visitGraph(addVertexPreOrder, addVertexPostOrder);
         
         
-    }
-    
-    void addVertexPostOrder(const int v){
-        postOrder.push_back(v);
-    }
-    
-    void addVertexPreOrder(const int v){
-        //preOrder.push_back(v);
     }
     /*
     void CreateReversePostOrder(){
@@ -70,7 +71,7 @@ public:
         
     public:
         GraphNotDAGException(const std::list<int> cycle) noexcept : exception(), cycle(cycle) {
-            printf(what());
+            std::cout << what();
         }
         
         virtual const char* what() const noexcept {
