@@ -23,19 +23,9 @@
 template <typename GraphType>
 class TopologicalSort {
 private:
-    /* A DEFINIR */
     std::vector<int> postOrder;
-    //std::vector<int> preOrder;
     
-public:
-    void addVertexPostOrder(const int v){
-        postOrder.push_back(v);
-    }
-    
-    void addVertexPreOrder(const int v){
-        //preOrder.push_back(v);
-    }
-    
+public:    
     //constructeur, Attends un SymbolGraph<DiGraph>
     TopologicalSort(const GraphType & g) {
         /* A IMPLEMENTER */  
@@ -52,12 +42,7 @@ public:
         //parcours DFS du graphe inversé
         dfs.visitGraph([](int){}, [&](int v){postOrder.push_back(v);});
     }
-    /*
-    void CreateReversePostOrder(){
-        
-    }
     
-    */
     //tableau contenant l'ordre de parcours des indexes des sommets dans le graphe
     const std::vector<int>& Order() {
         return postOrder;

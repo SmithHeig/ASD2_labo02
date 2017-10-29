@@ -54,8 +54,6 @@ public:
             /* Fin implémenté par nous */
 	}
 	
-        
-        
 	//liste les indexes des sommets formant une boucle
 	std::list<int> Cycle() {
             /* Implémenté par nous */
