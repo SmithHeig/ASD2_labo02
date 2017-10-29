@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
     std::list<int> cycle1 = dc1.Cycle();
     
     for(auto i = cycle1.begin(); i != cycle1.end(); i++){
-        cout << "(" << *i << ") ";
+        cout << "(" << g1.name(*i) << ") ";
     }
     cout << endl;
     

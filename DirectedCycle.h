@@ -82,24 +82,21 @@ private :
                 }
                 else if(!marked.at(adjList.front())){
                     HasCycleRecursiv(adjList.front());
-                    
-                    //retoru d'un appel récursif sans avoir trouvé de cycle on retire de la liste
-                    if(!cycleFound) {
-                        cycle.pop_back();
-                    }
                 } 
                 else if (stacked.at(adjList.front())){
                     
                     //ajoutes le dernier du cycle
                     cycle.push_back(adjList.front());
-                    
-                    std::cout << "\nCYCLE FOUND !!!\n";
                      
                     cycleFound = true;
                 }
                 adjList.pop_front();
             }
             stacked[v] = false;
+            //retour d'un appel récursif sans avoir trouvé de cycle on retire de la liste
+            if(!cycleFound) {
+                cycle.pop_back();
+            }
             return cycleFound;
         }
 	/* End Définit par nous */
